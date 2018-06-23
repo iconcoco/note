@@ -232,6 +232,11 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 			将字符串以某种分隔符分隔并以数组方式返回；
 			类比数组中join();与之相反
 
+		如何将二进制的字符装成字符创?
+			String.fromChatCode( code );
+		相反将字符串转成二进制
+			"str".charCodeAt();
+
 ##  function
 ###   函数的定义
 			函数的定义：(1) function fn(){	};  (2) var fn = function(){	};   (3) 构造函数   
@@ -2971,10 +2976,33 @@ jsonp({
 > 在angular中如果使用自己封装jsconp函数的时候，在请求回来的数据渲染到页面之后，需要告诉 scrope 服务说明数据发生了变化，这样页面中的数据才会发生相对应的变化；使用  $scrope.$apply()方法通知视图数据模型发生了变化;
 
 
+------
 
 # node
 
+http://nodejs.cn
+
 Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。**Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效，**采用非阻塞的操作，能够提高处理的效率
+
+在node中的顶级对象是global,是一个全局对象,任何地方都能访问到global对象,类似浏览器的window,node使用模块化开发,每个文件就是一个模块,就是一个作用域,如果想让其他文件能访问当前文件的变量,可以使用exports或者module.exports的方法向外暴露对象;
+
+
+## process 
+
+process 对象是一个`全局变量`，它**提供当前 Node.js 进程的有关信息**，以及控制当前 Node.js 进程
+
+process.env 属性返回一个包含用户环境信息的对象
+
+process.argv 返回运行环境的参数
+
+process.stdout 标准输出流
+
+process.stdin 标准输入流
+
+process.exit()方法以结束状态码code指示Node.js同步终止进程
+
+
+
 
 ##  模块
 
@@ -3885,6 +3913,14 @@ React要求自定义组件的类必须继承于 React.Component类
 
 闭包中的值变化不会引起视图变化
 
+##  脚手架搭建React项目
+
+1. npm install -g create-react-app
+2. create-react-app yourDemo ( yourDemo是项目目录 )
+3. cd yourDemo
+4. npm install
+5. npm run start
+
 
 - 渲染视图组件
 
@@ -4000,6 +4036,15 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 		表示的是调用改组件的时候,title属性参数是必须的,而且必须是字符串类型;否则会在控制台上报错
 
+	3. 在组件内部,也可以通过getDefaultProps来定义组件参数的默认值
+
+		getDefaultPropts(){
+			return:{
+				title:'',
+				name:''
+			}
+		}
+
 
 		
 - React 获取真实的Dom节点
@@ -4010,16 +4055,31 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 	
 	`<input type='text' ref='myText'><span onClick='{ this.handleClick }'></span>`
 
-	2. 设置点击事件获取到input的真实DOM节点
+	2. 设置点击事件获取到input的真实DOM节点,通过this.refs.[refName]来获取真实的DOM节点
 
-	`handleClick:function(){  this.ref.myText.focus()  }`
+	`handleClick:function(){  this.refs.myText.focus()  }`
 
 	
-	获取真实节点的步骤,1.在html结构中需要获取节点的元素上设置ref属性,并设置属性名; 2. 通过 this.ref.[refName] 获取就能返回真实的DOM节点;
+	获取真实节点的步骤,1.在html结构中需要获取节点的元素上设置ref属性,并设置属性名; 2. 通过 this.refs.[refName] 获取就能返回真实的DOM节点;
 
 
 - React 组件的生命周期
 
+	三个主要的动作术语:
+
 	1. Mounting: 已插入真实 DOM
 	2. Updating: 正在被重新渲染
 	3. Unmounting: 已移除真实DOM
+
+	每个动作术提供两个函数:
+
+	- componentWillMount()
+	- componentDidMount()
+	- componentWillUpdate()
+	- componentDidUpdate()
+	- componentWillUnmount()
+
+
+- React 中的表单
+
+	1. label需要定位到input上,不再是`for`属性,而是`htmlFor`
