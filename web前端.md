@@ -176,6 +176,22 @@
 	
 			splice() 方法会直接对数组进行修改！
 
+		ES6 新增的方法
+			1. Array.form()
+				用于将伪数组变成数组,大部分拥有lengt属性的对象都能用该方法变成数组
+				Array.from('我是字符创'));//[ '我', '是', '字','符','创' ]
+			2. Array.of()
+				用于将一组值转换成数组
+				//Array.of('wo','shi','ni')//[ 'wo', 'shi', 'ni' ]
+			3. Array.find()
+				循环查找符合条件并返回
+				Array.find(function(val){ return val; })
+			4.  Array.includes()
+				判断数组中是否含有某个值,返回一个布尔值
+				let  arr = [200,520,400,8,1,656];
+				arr.includes(888)//false
+
+
 ####	ES5新增的数组方法
 
 - forEach()
@@ -269,6 +285,40 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 
 ###  js中内置的对象
 (1) Number (2) Boolean (3) String (4) Array (5) Object (6) Function (7) Data (8) Math
+
+		ES6中新增的Object对象上的方法
+		1. Object.is()
+			用于判断两个对象是否相等
+			Object.is(NaN,NaN); //true
+			使用Object.is判断NaN是否等于他本身的时候返回true;基本上字面量看起来想象的两个对象使用该方法判断都会是一个true;
+
+		2. Object.assign()
+			用来合并对象,拷贝,继承,会返回一个新对象
+			   let b = {a:1},
+			       c = {b:21},
+			       d = {c:66};
+			Object.assign({},b,c,d)//{a: 1, b: 21, c: 66}
+			
+		3.  Object.keys(); Object.values(); Object.entries()
+			这三个方法应该配合循环使用,分别返回对象的属相/索引/还有循环的key,value组成的新数组对象
+
+			    var json = {
+			        "name":"jack",
+			        "age":"15"
+			    }
+
+				for (let key of Object.keys(json)) {
+				        console.log(key);//name age
+				   }
+
+				for (let key of Object.values(json)) {
+				        console.log(key);//jack 15
+				    }
+
+				for (let key of Object.entries(json)) {
+				        console.log(key);//[ "name":"jack"] ["age":"15"]
+				    }
+				
 
 ### 对象的创建
 		(1) var obj = new Object();
