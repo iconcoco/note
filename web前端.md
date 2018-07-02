@@ -397,6 +397,8 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 		3) 获取属性值
 			ele.getAttribute();
 
+		公国getAttribute()的方法来获取元素的class的时候需要做兼容处理,IE8不能通过getAttribute方法来获取类名;
+
 ###  节点类型判断
 
 	1.nodeType
