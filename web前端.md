@@ -175,7 +175,7 @@
 			arr.splice(从何处删除/添加元素,删除或添加的数量,向数组中添加的元素(可以是多个元素))
 	
 			splice() 方法会直接对数组进行修改！
-
+	
 		ES6 新增的方法
 			1. Array.form()
 				用于将伪数组变成数组,大部分拥有lengt属性的对象都能用该方法变成数组
@@ -247,7 +247,19 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 		2.2.8 split()
 			将字符串以某种分隔符分隔并以数组方式返回；
 			类比数组中join();与之相反
-
+			
+		2.2.9 ncludes()
+			判断某个字符中是否包含某字符，返回布尔值；
+			str.includes(code);
+		
+		2.2.10 startsWith()/endsWith()
+			判断某个字符串是否以某个字段 开头/结尾
+			str.startsWith(code)/str.endsWith(code);
+		
+		2.2.11 repeat
+			将某个字符串重复复制x遍；
+			str.repreat(num);
+	
 		如何将二进制的字符装成字符创?
 			String.fromChatCode( code );
 		相反将字符串转成二进制
@@ -296,7 +308,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 			用于判断两个对象是否相等
 			Object.is(NaN,NaN); //true
 			使用Object.is判断NaN是否等于他本身的时候返回true;基本上字面量看起来想象的两个对象使用该方法判断都会是一个true;
-
+	
 		2. Object.assign()
 			用来合并对象,拷贝,继承,会返回一个新对象
 			   let b = {a:1},
@@ -306,24 +318,24 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 			
 		3.  Object.keys(); Object.values(); Object.entries()
 			这三个方法应该配合循环使用,分别返回对象的属相/索引/还有循环的key,value组成的新数组对象
-
+	
 			    var json = {
 			        "name":"jack",
 			        "age":"15"
 			    }
-
+	
 				for (let key of Object.keys(json)) {
 				        console.log(key);//name age
 				   }
-
+	
 				for (let key of Object.values(json)) {
 				        console.log(key);//jack 15
 				    }
-
+	
 				for (let key of Object.entries(json)) {
 				        console.log(key);//[ "name":"jack"] ["age":"15"]
 				    }
-				
+
 
 ### 对象的创建
 		(1) var obj = new Object();
@@ -339,6 +351,30 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 				console.log(key + '---' + obj[key]);
 			}
 		// name---sandy;age---20;skill---lovely;
+
+## 类 Class
+
+		Class Person {
+	        constructor(){
+	            
+	        }
+	        
+	        get prop(){
+	            return '你想要返回的值';
+	        }
+	        
+	        set prop(value){
+	            //设置你想要设置的值
+	        }
+		}
+		
+		let P = new Person():
+		P.prop='反正现在说什么都完了！';
+		P.prop // 你想要返回的值；
+
+###  Class的继承
+-- super关键字
+		super作为函数调用时，**代表父类的构造函数**。ES6 要求，子类的构造函数必须执行一次super函数。等同于ES5中的 obj.prototype.fn.call(this);
 
 ##  DOM
 
@@ -363,7 +399,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 
 
 			兼容问题：有兼容问题。低版本的火狐浏览器不兼容
-
+	
 		3.textContent
 			与innerText 作用一样；
 	
@@ -396,7 +432,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 			ele.removeAttribute();
 		3) 获取属性值
 			ele.getAttribute();
-
+	
 		公国getAttribute()的方法来获取元素的class的时候需要做兼容处理,IE8不能通过getAttribute方法来获取类名;
 
 ###  节点类型判断
@@ -539,7 +575,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
    ele.offsetLeft/ele.offsetTop
 
    	获取的是自己的边框到最近定位的父级元素内边框的距离，若父级元素没有定位，则距离获取到body；
-
+		
    	且获取的值只能获取到整数，碰上小数则会四舍五入
 
 > offsetLeft与style.left的区别
@@ -573,9 +609,9 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 ###  事件对象
 
 	每个元素注册事件之后，在执行事件的时候，都会有一个事件对象；
-
+	
 	ele.onclick = function(event){ event = event || window.event }
-
+	
 		事件对象event,里面可以获取到很多属性;
 			event.pageX/pageY;当前位置坐标到页面左上角的距离
 			event.clientX/clientY;当前位置坐标到当前可视区左上角的距离
@@ -591,15 +627,15 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
    好处是可以对同一个对象注册多个相同事件名称；
 
    	1.ele.addEventListener('click',fn,false);//IE8不支持
-
+		
    	2.ele.attachEvent('onclick',fn);//仅IE8支持
 
 ###  移除事件
 
 		1.removeEventListener('type',fn,false);
-
+	
 		2.detachEvent(on+'type',fn);
-
+	
 		3.ele.onclick = null;
 
 ###  事件冒泡
@@ -707,7 +743,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 # jQuery
 
 		JavaScript是一门编程语言，jquery是用JavaScript实现的一个JavaScript库，目的是简化我们的开发
-
+	
 		jQuery各版本的区别是：
 			1.x 版本支持IE6，7，8；
 			2.x 既以上不在支持IE6,7,8
@@ -735,7 +771,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 ###  jQuery对象与DOM对象之间的转换
 
 		jQuery对象只能使用jQuery方法，DOM对象只能使用DOM对象方法；
-
+	
 		1.DOM对象转jQuery对象
 			将DOM对象放在$()里面就可以将DOM对象转为jQuery对象；
 
@@ -929,7 +965,7 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 ###		scrollTop()/scrollLeft()
 
 		页面被卷去的距离，是可读写属性；
-
+	
 		注意区分：
 			scroll()是个事件
 
@@ -1061,15 +1097,15 @@ lazyload方法里面的对象方法:
 			placeholder : "img/grey.gif", //用图片提前占位
 	    		// placeholder,值为某一图片路径.此图片用来占据将要加载的图片的位置,待图片加载时,占位图则会隐藏
 			effect: "fadeIn", // 载入使用何种效果
-    			// effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn
+				// effect(特效),值有show(直接显示),fadeIn(淡入),slideDown(下拉)等,常用fadeIn
 			threshold: 200, // 提前开始加载
-    			// threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉
+				// threshold,值为数字,代表页面高度.如设置为200,表示滚动条在离目标位置还有200的高度时就开始加载图片,可以做到不让用户察觉
 			event: 'click',  // 事件触发时才加载
-    			// event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试…
+				// event,值有click(点击),mouseover(鼠标划过),sporty(运动的),foobar(…).可以实现鼠标莫过或点击图片才开始加载,后两个值未测试…
 			container: $("#container"),  // 对某容器中的图片实现效果
-    			// container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片
+				// container,值为某容器.lazyload默认在拉动浏览器滚动条时生效,这个参数可以让你在拉动某DIV的滚动条时依次加载其中的图片
 			failurelimit : 10 // 图片排序混乱时
-     			// failurelimit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题.
+	 			// failurelimit,值为数字.lazyload默认在找到第一张不在可见区域里的图片时则不再继续加载,但当HTML容器混乱的时候可能出现可见区域内图片并没加载出来的情况,failurelimit意在加载N张可见区域外的图片,以避免出现这个问题.
 		})
 
 
@@ -1952,7 +1988,7 @@ json是一种特殊格式的字符串，用于传输数据;
 		<script src="请求的不同源的服务器地址"></script>
 		//实质是发送一个get请求，所以，数据可以在地址栏中进行拼接
 		<script src="https//:xxx.com/?name=jaks&age=16">
-
+	
 	  	//在服务器中通过echo返回要处理的数据程序
 	  	<script>
 	  		function Dodata(data){console.log(data)};//定义要处理数据的函数
@@ -2041,9 +2077,9 @@ prototype/__proto__/construtor 之间的关系;
 ###  hasOwnProperty()方法
 
 		hasOwnPrototype()方法可以检测一个属性是存在于实例中还是存在于原型;如果存在于自身，则会返回turn,如果存在于原型中,则会返回false;
-
+	
 		语法： Obj.hasOwnProperty('属性名');// 返回一个boolean值；
-
+	
 		var obj = {this.name:'sandy',this.age:'22'};
 		obj.hasOwnProperty('name')//true;
 		obj.hasOwnProperty('toString')//false;
@@ -2059,16 +2095,16 @@ prototype/__proto__/construtor 之间的关系;
 ###  instanceof
 
 		作用：判断对象的原型链中是否含有某构造函数的prototype;//返回的也是一个boolean值；
-
+	
 		注意： instanceof 与in 运算符 hasOwnProperty() 的区别是，instanceof 判断的是对象是否含有构造函数的prototype，判断对象是是否继承了原型链prototype;
-
+	
 		in 运算符是判断对象是否可以使用某属性，判断的是属性,只要有该属性存在，无论存在于构造函数中还是存在于原型中，返回的结果都是ture; 
 		hasOwnProperty也是判断的是对象是否含有某属性,判断的对象是属性，如果该属性存在于prototype中，hasOwnProperty判断为false;
 
 ### extend()
 
 		通过extend方法可以给对象添加另一个对象的原型方法；
-
+	
 		例： function Animal(){}; Animal.prototype.eat = function(){console.log('吃')};
 			function Person(){}//Person与Animal都有一些公共的方法属性，那么可以将Animal的方法通过拷贝的
 		方式拷贝给Person;
@@ -2146,9 +2182,9 @@ call()与apply()除了在传参的形式上有区别,其用法和作用都是一
 
 ###   forEach
 		forEach方法用于遍历数组；arr.forEach(function(value,index,arr){});
-
+	
 		forEach方法没有返回值，返回的是undefined;在回调函数中的第三个参数，可以用于存放function内部this的新指向对象;
-
+	
 		var arr = [];
 		arr.forEach(function(value,index){console.log(this)}); // window;
 		arr.forEach(function(value,index,arr){console.log(this)}); // Array;
@@ -2157,16 +2193,16 @@ forEach()没有返回值；
 
 ###   map
 		map方法也用于遍历数组;arr.map(function(value,index,arr){});
-
+	
 		map()与forEach()都用于遍历数组，区别是：forEach()没有返回值，map()方法有返回值，放回的值会组成新数组;
-
+	
 		其他用法和性质跟forEach()一模一样;
 map()有返回值，返回值会组成新的数组；
 
 ###   filter
 
 		filter()方法用于过滤数组，其结果是返回新的过滤后的数组；
-
+	
 		var newArr = arr.filter(function(){
 						if(){return true}
 							else{return false}
@@ -3027,7 +3063,6 @@ jsonp({
 
 > 在angular中如果使用自己封装jsconp函数的时候，在请求回来的数据渲染到页面之后，需要告诉 scrope 服务说明数据发生了变化，这样页面中的数据才会发生相对应的变化；使用  $scrope.$apply()方法通知视图数据模型发生了变化;
 
-
 ------
 
 # node
@@ -3670,7 +3705,7 @@ https://router.vuejs.org/zh-cn
 		2.导入并注册
 			import vuex from ""
 			Vue.use(vuex);
-
+		
 		3.创建仓库
 			var store = new vueX.store({
 				state:{},//用以存储数据
@@ -3723,13 +3758,13 @@ npm run dev
 			- 1  链接成功
 			- 2  链接正在关闭
 			- 3  链接关闭,或打开链接失败
-
+	
 		+ ws.onopen(fn)
 			- 指定成功链接之后的回调函数
 		
 		+ ws.oncloce(fn)
 			- 指定链接关闭之后的回调函数
-
+	
 		+ ws.onmessage(fn)
 			- 用于指定接收到服务器数据之后的回调函数
 			- ws.onmessage(function(even){
@@ -3785,19 +3820,18 @@ https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html
 
 - App()
 
-		App()方法是主要组件中的方法,主要设置整个小程序的相关设置
-		1. onLaunch 生命周期函数--监听小程序初始化	当小程序初始化完成时，会触发 onLaunch（全局只触发一次;
-		2. onShow  生命周期函数--监听小程序显示	当小程序启动，或从后台进入前台显示，会触发 onShow;
-		3. onHide  生命周期函数--监听小程序隐藏	当小程序从前台进入后台，会触发 onHide
-		4. onError  错误监听函数	当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息
+   App()方法是主要组件中的方法,主要设置整个小程序的相关设置
+   	1. onLaunch 生命周期函数--监听小程序初始化	当小程序初始化完成时，会触发 onLaunch（全局只触发一次;
+   	2. onShow  生命周期函数--监听小程序显示	当小程序启动，或从后台进入前台显示，会触发 onShow;
+   	3. onHide  生命周期函数--监听小程序隐藏	当小程序从前台进入后台，会触发 onHide
+   	4. onError  错误监听函数	当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息
 
-		开发者可以添加任意的函数或数据到 Object 参数中，用 this 可以访问
-		微信提供getApp()方法,在其他组件中可以通过getApp()获取到app组件的实例,进而可以访问全局的数据
-
-		- navigateTo, redirectTo 只能打开非 tabBar 页面。
-		- switchTab 只能打开 tabBar 页面。
-		- reLaunch 可以打开任意页面。
-		
+   	开发者可以添加任意的函数或数据到 Object 参数中，用 this 可以访问
+   	微信提供getApp()方法,在其他组件中可以通过getApp()获取到app组件的实例,进而可以访问全局的数据
+   	
+   	- navigateTo, redirectTo 只能打开非 tabBar 页面。
+   	- switchTab 只能打开 tabBar 页面。
+   	- reLaunch 可以打开任意页面。
 
 - Page()
 
@@ -3815,7 +3849,7 @@ https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html
 		11. onTabItemTap 当前是 tab 页时，点击 tab 时触发
 
 		开发者可以添加任意的函数或数据到 object 参数中，在页面的函数中用 this 可以访问
-
+		
 		- getCurrentPages() 获取当前页面栈的实例
 
 
@@ -3925,6 +3959,8 @@ http://es6.ruanyifeng.com/#docs
 
 ES6一共有6种生命变量的方法:let/const/import/class/function/var
 
+
+
 #  设置文字超出之后变为省略号
 
 white-space: nowrap;
@@ -4030,7 +4066,7 @@ ReactDOM.render({
 
 	}
 });
-	 
+	
 
 状态管理在方法参数中使用 getInitalState() 函数来返回初始的状态,
 调用状态的时候使用 { this.state.checked } 来调用定义的状态;
@@ -4056,16 +4092,15 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 - React 子组件向父组件传参
 
-	如果需要自组件向父组件传参,需要父组件向子组件中传递一个函数,在子组件中向改函数传递需要传递的参数,通过函数传递参数的方式向父组件传参!
-	
-	父组件中:
-	1. `<myCom  fn={ this.fn }></myCom>`
-	2. 在定义的组件类中,定义一个fn的函数来接收子组件传递过来的参数
+  如果需要自组件向父组件传参,需要父组件向子组件中传递一个函数,在子组件中向改函数传递需要传递的参数,通过函数传递参数的方式向父组件传参!
 
-	子组件中:
-	通过this.props.fn 调用父组件传递过来的函数并传递参数
+  父组件中:
+  1. `<myCom  fn={ this.fn }></myCom>`
+  2. 在定义的组件类中,定义一个fn的函数来接收子组件传递过来的参数
 
-	
+  子组件中:
+  通过this.props.fn 调用父组件传递过来的函数并传递参数
+
 - React 框组件传参
 
 	在最上层的组件中,通过`getChildContext(){}`方法返回设置一个需要向后代组件传递的参数,并通过类的原型给child的类型设置值;
@@ -4098,7 +4133,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 		}
 
 
-		
+​		
 - React 获取真实的Dom节点
 
 	组件并不是真实的DOM节点, 而是存在于内存之中的一种数据结构,叫做虚拟DOM,只有当它插入文档以后,才会变成真实的DOM;如果需要在组件中获取真实的DOM节点,需要用到ref属性;
@@ -4135,3 +4170,32 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 - React 中的表单
 
 	1. label需要定位到input上,不再是`for`属性,而是`htmlFor`
+
+
+
+#  ES6
+
+##  proxy
+
+	proxy就是一个拦截器，代理，它是一种设计模式；
+
+		new Porxy(target,handle);
+		//target   被代理的对象
+		//handle   对代理对象做的操作  { set(){},get(){},deleteProperyt(){},has(){},applay(){}... }
+		结果会有一个返回值
+
+		//1. 定义一个对象
+		let obj = {
+			name:'LUOLIN'
+		};
+		//2. 代理对象，处理返回值
+		let newobj = new Proxy(obj,{
+			get(target,property){  //访问的原对象--obj  perperty--访问的是哪个属性
+				return  'string';
+			},
+			set(target,property,value){
+				
+			}
+		});
+		//3.访问属性，会返回处理之后的结果
+		newobj.name // string;
