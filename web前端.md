@@ -4173,6 +4173,27 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
   2. 如果想指定input默认的值，不再是`value`,而是`defaultValue`；
   3. 定义类名不再是`class`，而是`className`；
 
+- React中的有状态组件与无状态组件
+
+	React中的有状态组件指的是**在该组件中拥有React的生命钩子函数**，而无状态组件则没有React的生命钩子函数；
+	有状态的组件能够使用React的组件的状态存储`this.state`,`this.setState()`;而无状态组件则不能使用；
+	```javascript
+		<!-- 有状态的组件 -->
+		Class Person extends React.component{
+			constructor(){}
+			componentWillMount(){}
+			<!-- return some code -->
+			render(){ return ( ) }
+			componentDidMount(){ }
+		}；
+
+		<!-- 无状态组件 -->
+		const Person = ()=>{
+			<!-- return some code -->
+			return 
+		}
+	```
+
 
 
 #  ES6
