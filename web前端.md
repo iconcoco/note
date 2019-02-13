@@ -4092,7 +4092,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 - React 子组件向父组件传参
 
-  如果需要自组件向父组件传参,需要父组件向子组件中传递一个函数,在子组件中向改函数传递需要传递的参数,通过函数传递参数的方式向父组件传参!
+  如果需要子组件向父组件传参,需要父组件向子组件中传递一个函数,在子组件中向该函数传递需要传递的参数,通过函数传递参数的方式向父组件传参!
 
   父组件中:
   1. `<myCom  fn={ this.fn }></myCom>`
@@ -4169,7 +4169,9 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 - React 中的表单
 
-	1. label需要定位到input上,不再是`for`属性,而是`htmlFor`
+  1. label需要定位到input上,不再是`for`属性,而是`htmlFor`；
+  2. 如果想指定input默认的值，不再是`value`,而是`defaultValue`；
+  3. 定义类名不再是`class`，而是`className`；
 
 
 
@@ -4178,12 +4180,13 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 ##  proxy
 
 	proxy就是一个拦截器，代理，它是一种设计模式；
-
+	
+	```javascript
 		new Porxy(target,handle);
 		//target   被代理的对象
 		//handle   对代理对象做的操作  { set(){},get(){},deleteProperyt(){},has(){},applay(){}... }
-		结果会有一个返回值
-
+		// 结果会有一个返回值
+	
 		//1. 定义一个对象
 		let obj = {
 			name:'LUOLIN'
@@ -4194,8 +4197,9 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 				return  'string';
 			},
 			set(target,property,value){
-				
+	
 			}
 		});
 		//3.访问属性，会返回处理之后的结果
 		newobj.name // string;
+	```
