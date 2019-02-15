@@ -597,6 +597,8 @@ arr.forEach(function(item,index,arr){});//forEach没有返回值，返回的只�
 
    	一般都会配合window.onscroll事件一起使用！
 
+> 将window滚动到最顶部： window.scrollTo(xpos,ypos);
+
 
 ###  client
 
@@ -3625,6 +3627,42 @@ https://router.vuejs.org/zh-cn
 
 > 当如果在路由传参的方式是"/home?name='sandy'"的类型的时候,通过$route.query的方法获取从路由传过来的参数;
 
+###  script路由跳转
+除了通过a标签的路由跳转，vue-router还支持通过script中实例的路由监视跳转；
+
+		```javascript
+			this.$router.push({ 
+				name:'home',	//路由跳转的组件名称
+				params:{},		//路由跳转过去夹带的参数
+				query:{},		//路由跳转过去夹带的参数
+			})
+		```
+> 其中`params`中的参数将会作为隐式传参，链接中不会看到的参数，在`目标`组件中，通过`this.$route.params`获取传过来的参数；
+> 其中`query`中的参数将会在链接中看到的参数（www.baidu.com?aa=11&cc=8989），在`目标`组件中，通过`this.$route.query`获取传过来的参数；
+
+###  路由的拦截
+在路由跳转的时候，有时候需要在跳转路由之前做一些拦截，处理请求；在vue实例对象中注册路由之前进行设置；
+
+	```javascript
+		const vRouter = new VueRouter(); //
+
+		//路由跳转之前
+		vRouter.beforeEach((to,from,next)=>{
+			//to  	object 目标路由
+			//from  object 原路由
+			//next  fn 执行跳转的函数  next({name:xxx}) next(false)  具体使用可以看文档
+
+		});
+		//路由跳转之候
+		vRouter.afterEach((to)=>{
+
+		});
+
+		new Vue({
+			 router:vRouter,
+		})
+	```
+
 ###   父子组件
 ####  父组件给子组件传参
 父组件中:
@@ -4171,7 +4209,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 	https://react.docschina.org/docs/composition-vs-inheritance.html
 	
-	`children`属性可以将子元素直接传递输出；
+> `children`属性可以将子元素直接传递输出；
 	
 	```javascript
 		class Person extends React.compoent{
@@ -4224,6 +4262,26 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 		}
 	```
 
+	有状态组件会调用React的生命周期，**如果一个组件中只是纯展示不需要通过状态来变更试图，建议使用无状态组件**；
+
+	React的生命周期 https://react.docschina.org/docs/react-component.html；
+
+
+
+				路由 ：react-router-dom
+				英文文档：https://reacttraining.com/react-router/
+				中文文档（简书）：http://www.jianshu.com/p/e3adc9b5f75c/
+				安装命令：yarn add react-router-dom
+				状态管理 ：redux
+				文档 : http://www.redux.org.cn/
+				安装：需要先安装redux yarn add redux
+				然后安装react-redux yarn add react-redux
+				异步数据 redux-thunk yarn add redux-thunk
+				请求数据 ：fetch
+				英文文档：https://github.com/github/fetch
+				中文文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API
+				安装：yarn add whatwg-fetch
+
 
 
 #  ES6
@@ -4231,7 +4289,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 ##  proxy
 
 	proxy就是一个拦截器，代理，它是一种设计模式；
-	
+
 	```javascript
 		new Porxy(target,handle);
 		//target   被代理的对象
@@ -4254,3 +4312,13 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 		//3.访问属性，会返回处理之后的结果
 		newobj.name // string;
 	```
+	
+
+## class
+
+- super
+
+	super 关键字用于访问父对象上的函数。
+
+	super([arguments]); // 访问父对象上的构造函数
+	super.functionOnParent([arguments]); // 访问对象上的方法
