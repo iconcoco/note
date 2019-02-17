@@ -4282,7 +4282,10 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 				中文文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API
 				安装：yarn add whatwg-fetch
 
+- React的路由
 
+	https://reacttraining.com/react-router/web/guides/quick-start
+	https://reacttraining.com/react-router/web/guides/philosophy
 
 #  ES6
 
