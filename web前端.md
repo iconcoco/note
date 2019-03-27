@@ -3758,6 +3758,18 @@ https://router.vuejs.org/zh-cn
 				store:store
 			)
 
+##  一些Vue的使用技巧
+
+###  keep-alive
+	开发中有时会使用 `<component :is="currentComponent"></compoent>` 来切换不同的组件，假如`组件A`还有切换，你希望在组件A中选中tab之后，切换B再切回来，组件A中选中的不想重新再选中，那么这时候就可以使用 `<keep-alive></keep-alive>`了，使用如下
+
+	```javascript
+		<keep-alive>
+			<component v-bind:is="currentComponent"></component>
+		</keep-alive>
+	```
+
+
 
 ##  使用vue-cli脚手架搭建vue项目
 ###  安装vue-cli
@@ -4209,8 +4221,8 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 	https://react.docschina.org/docs/composition-vs-inheritance.html
 	
-> `children`属性可以将子元素直接传递输出；
-	
+> `children`属性可以将子元素直接传递输出;
+
 	```javascript
 		class Person extends React.compoent{
             constructor(props){
@@ -4224,8 +4236,6 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
             }
 		}；
 	```
-	
-	
 
 	
 
@@ -4284,9 +4294,46 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 - React的路由
 
+	React的路由需要下载`react-router-dom`的插件
+
 	https://reacttraining.com/react-router/web/guides/quick-start
 	https://reacttraining.com/react-router/web/guides/philosophy
 
+> 1. 引入`HashRouter`组件作为整个路由切换的容器，类似vue的router-view标签；
+> 2. 在需要定义路由的地方引入`Route`组件，定义配置对应的路由与组件；
+> 3. `Link`组件作为触发路由切换的条件；
+
+
+		```javascript
+			import { HashRouter,Route,Link } from 'react-router-dom';
+
+			class AppRouter extends React.component{
+				render(){
+					return(
+						<HashRouter>
+							<div>
+								<Link to="/login">登录页</Link>
+								<Link to="/admin">商户页</Link>
+
+
+
+								<Route exact path="/login" component={ Login }></Route>
+								<Route exact path="/admin" component={ Admin }></Route>
+							</div>
+						</HashRouter>
+					)
+				}
+			}
+
+			const Login = ()=>{
+				return (<div> 登录页面组件 </div>)
+			}
+			const Admin = ()=>{
+				return (<div> 商户个人页面组件 </div>)
+			}
+
+			export default AppRouter;
+		```
 #  ES6
 
 ##  proxy
