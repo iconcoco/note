@@ -3511,14 +3511,14 @@ v-on用于事件的绑定，基本语法：`v-on:click="show"`;
 ###  创建组件步骤
 1. 创建组件视图
 
-		<script type="text/html" id="tpl">
-			<div>
-				<h1>首页头部</h1>
-				<div>{{msg}}</div>
-				<input type="button" value="按钮" @click="show">
-			</div>
-		</script>
-		//将需要进行引入的html装入一个容器中，一定要有root容器；
+   <script type="text/html" id="tpl">
+   		<div>
+   			<h1>首页头部</h1>
+   			<div>{{msg}}</div>
+   			<input type="button" value="按钮" @click="show">
+   		</div>
+   	</script>
+   	//将需要进行引入的html装入一个容器中，一定要有root容器；
 
 2. 创建组件
 
@@ -3542,18 +3542,53 @@ component方法用来创建注册组件，方法中接受两个参数，第一�
 
 组件定义配置好之后，在html中直接向使用标签一样引用组件的名字；`<login></login>`
 
+###  混入
+混入 (mixins) 是一种分发 Vue 组件中可复用功能的非常灵活的方式;简单通俗的讲就是讲每个组件执行的代码进行抽离统一管理；
+
+例：需求，每个组件在创建的时候打印一行字；
+code:
+```javascript
+		var mixin = {
+			created: function () {
+				console.log('do someting');
+			},
+		}
+
+		// 定义一个使用混入对象的组件
+		Vue.component('componentName',{
+			mixins:[mixin],  //将定义好的混入对象注入当前组件中
+			data(){
+				return {
+
+				}
+			}
+		});
+```
+
 ##  过滤器
 ###  私有过滤器
 私有过滤器一般设置在局部的实例对象解析的范围内，其他新创建的实例不能使用；
 
-		new Vue({
-			el:"",
-			filters:{
-				sandy:function(data){ 
-					return ...
-				}
+```javascript
+	new Vue({
+		el:"",
+		filters:{
+			sandy:function(data){ 
+				return ...
 			}
-		})
+		}
+	});
+
+
+	//组件中定义过滤器
+	export default {
+		data(){ return {} },
+		created(){},
+		filter:{
+			dataFilter(value){ return .. }
+		}
+	}
+```
 
 在实例中设置的过滤器就是私有过滤器;
 
@@ -3645,19 +3680,19 @@ https://router.vuejs.org/zh-cn
 
 	```javascript
 		const vRouter = new VueRouter(); //
-
+	
 		//路由跳转之前
 		vRouter.beforeEach((to,from,next)=>{
 			//to  	object 目标路由
 			//from  object 原路由
 			//next  fn 执行跳转的函数  next({name:xxx}) next(false)  具体使用可以看文档
-
+	
 		});
 		//路由跳转之候
 		vRouter.afterEach((to)=>{
-
+	
 		});
-
+	
 		new Vue({
 			 router:vRouter,
 		})
@@ -3762,7 +3797,7 @@ https://router.vuejs.org/zh-cn
 
 ###  keep-alive
 	开发中有时会使用 `<component :is="currentComponent"></compoent>` 来切换不同的组件，假如`组件A`还有切换，你希望在组件A中选中tab之后，切换B再切回来，组件A中选中的不想重新再选中，那么这时候就可以使用 `<keep-alive></keep-alive>`了，使用如下
-
+	
 	```javascript
 		<keep-alive>
 			<component v-bind:is="currentComponent"></component>
@@ -4183,7 +4218,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 		}
 
 
-		
+​		
 - React 获取真实的Dom节点
 
 	组件并不是真实的DOM节点, 而是存在于内存之中的一种数据结构,叫做虚拟DOM,只有当它插入文档以后,才会变成真实的DOM;如果需要在组件中获取真实的DOM节点,需要用到ref属性;
@@ -4222,22 +4257,24 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 	https://react.docschina.org/docs/composition-vs-inheritance.html
 	
 > `children`属性可以将子元素直接传递输出;
+> 需要注意，this.props.children的值有三种可能: 1.如果当前组件没有子节点，它就是 undefined;2.;如果有一个子节点，数据类型是 object ;3.如果有多个子节点，数据类型就是 array;
 
 	```javascript
 		class Person extends React.compoent{
-            constructor(props){
-                
-            }
-            <!-- props.children 展示子组件的内容 类似vue的slot -->
-            render(){
-                return ( <div> 组件内容
-                	 { props.children }
-                </div> )
-            }
+	        constructor(props){
+	            
+	        }
+	        <!-- props.children 展示子组件的内容 类似vue的slot -->
+	        render(){
+	            return ( <div> 组件内容
+	            	 { props.children }
+	            </div> )
+	        }
 		}；
 	```
 
-	
+
+​	
 
 - React 中的表单
 
@@ -4306,7 +4343,7 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 		```javascript
 			import { HashRouter,Route,Link } from 'react-router-dom';
-
+	
 			class AppRouter extends React.component{
 				render(){
 					return(
@@ -4324,14 +4361,14 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 					)
 				}
 			}
-
+	
 			const Login = ()=>{
 				return (<div> 登录页面组件 </div>)
 			}
 			const Admin = ()=>{
 				return (<div> 商户个人页面组件 </div>)
 			}
-
+	
 			export default AppRouter;
 		```
 #  ES6
@@ -4362,8 +4399,6 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 		//3.访问属性，会返回处理之后的结果
 		newobj.name // string;
 	```
-	
-
 ## class
 
 - super
