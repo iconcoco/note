@@ -3584,10 +3584,15 @@ code:
 	export default {
 		data(){ return {} },
 		created(){},
-		filter:{
+		filters:{
 			dataFilter(value){ return .. }
 		}
 	}
+
+	//组件中使用
+	<template>
+		<div>{{ data | dataFilter }}</div>
+	</template>
 ```
 
 在实例中设置的过滤器就是私有过滤器;
@@ -4355,7 +4360,10 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 
 
 								<Route exact path="/login" component={ Login }></Route>
-								<Route exact path="/admin" component={ Admin }></Route>
+
+								<Route path="/admin" component={ Admin }></Route>
+								// 二级目录 注意在一级目录中不要使用 exact 精确匹配
+								<Route path="/admin/customer" component={ customer }></Route>
 							</div>
 						</HashRouter>
 					)
@@ -4371,6 +4379,104 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 	
 			export default AppRouter;
 		```
+
+##  Redux
+
+Redux类似Vuex，统一管理状态，如果Redux的状态发生了变化，试图中也会做出相应的更新
+
+Redux的设计思想
+
+> Web 应用是一个状态机，视图与状态是一一对应的。
+> 所有的状态，保存在一个对象里面。
+
+###  store
+
+Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
+Redux 提供createStore这个函数，用来生成 Store。
+
+```javascript
+	import { createStore } from 'redux';
+	const store = createStore({})
+```
+
+- getState();
+
+	获取当前仓库中的状态，可以通过`getState`的方法进行获取；
+
+```javascript
+	import { createStore } from 'redux';
+	const store = createStore({});
+
+	const state = store.getState();
+```	
+
+###  Action
+
+State 的变化，会导致 View 的变化。但是，用户接触不到 State，只能接触到 View。所以，State 的变化必须是 View 导致的。Action 就是 View 发出的通知，表示 State 应该要发生变化了;
+
+Action可以理解为一个触发改变state的`触发机制`;
+
+```javascript
+
+	const action = {
+		type:'ADD_TODO' //这是必须的
+	};
+
+	//多个action使用函数来定义
+
+	function addAction(){ 
+		return {
+			type:'ADD_TODO'
+		}
+	}
+
+	const action = addAction()
+
+```
+
+- dispatch()
+
+dispatch是view试图触发action的唯一途径;
+
+```javascript
+	store.dispatch({type:'ADD_TODO'})
+```
+
+###  Reducer
+
+Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。
+它是一个纯函数。也就是说，只要是同样的输入，必定得到同样的输出。
+Reducer 函数里面不能改变 State，必须返回一个全新的对象。
+
+```javascript
+
+	const Reducer = (state,action)=>{
+		switch(action.type){
+			case 'ADD_TODO' :
+				{
+					return state + action.payload;
+				} 
+				break;
+			default 
+				return state;
+		}
+	};
+
+	const state = reducer(1, {
+		type: 'ADD',
+		payload: 2
+	});
+
+```
+
+实际应用中，Reducer 函数不用像上面这样手动调用，store.dispatch方法会触发 Reducer 的自动执行。为此，Store 需要知道 Reducer 函数，做法就是在生成 Store 的时候，将 Reducer 传入createStore方法。
+
+```javascript
+	import { createStore } from 'redux';
+	import Reducer from './reducer.js';
+	const Store = createStore(Reducer)
+```
+
 #  ES6
 
 ##  proxy
