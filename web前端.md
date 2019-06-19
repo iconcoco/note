@@ -4357,10 +4357,8 @@ ref 属性 指定元素 ,在其他js函数中,通过 this.ref.指定的元素.�
 								<Link to="/login">登录页</Link>
 								<Link to="/admin">商户页</Link>
 
-
-
 								<Route exact path="/login" component={ Login }></Route>
-
+	
 								<Route path="/admin" component={ Admin }></Route>
 								// 二级目录 注意在一级目录中不要使用 exact 精确匹配
 								<Route path="/admin/customer" component={ customer }></Route>
@@ -4408,7 +4406,7 @@ Redux 提供createStore这个函数，用来生成 Store。
 	const store = createStore({});
 
 	const state = store.getState();
-```	
+```
 
 ###  Action
 
@@ -4482,7 +4480,7 @@ Reducer 函数里面不能改变 State，必须返回一个全新的对象。
 ##  proxy
 
 	proxy就是一个拦截器，代理，它是一种设计模式；
-
+	
 	```javascript
 		new Porxy(target,handle);
 		//target   被代理的对象
