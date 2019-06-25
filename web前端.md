@@ -4387,6 +4387,8 @@ Redux的设计思想
 > Web 应用是一个状态机，视图与状态是一一对应的。
 > 所有的状态，保存在一个对象里面。
 
+应用中所有的 state 都以一个对象树的形式储存在一个单一的 store 中。 惟一改变 state 的办法是触发 action，一个描述发生什么的对象。 为了描述 action 如何改变 state 树，你需要编写 reducers。
+
 ###  store
 
 Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
@@ -4445,6 +4447,8 @@ dispatch是view试图触发action的唯一途径;
 Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。
 它是一个纯函数。也就是说，只要是同样的输入，必定得到同样的输出。
 Reducer 函数里面不能改变 State，必须返回一个全新的对象。
+
+reducer描述了 action 如何把 state 转变成下一个 state。
 
 ```javascript
 
