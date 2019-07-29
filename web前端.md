@@ -4389,6 +4389,8 @@ Redux的设计思想
 
 应用中所有的 state 都以一个对象树的形式储存在一个单一的 store 中。 惟一改变 state 的办法是触发 action，一个描述发生什么的对象。 为了描述 action 如何改变 state 树，你需要编写 reducers。
 
+> Provider 是一个组件，其子组件可以拿到sotre里面的state。
+
 ###  store
 
 Store 就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。
@@ -4396,7 +4398,7 @@ Redux 提供createStore这个函数，用来生成 Store。
 
 ```javascript
 	import { createStore } from 'redux';
-	const store = createStore({})
+	const store = createStore({});
 ```
 
 - getState();
